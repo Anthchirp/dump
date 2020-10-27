@@ -6,8 +6,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - uses: actions/create-outputs@v0.0.0-fake
+    - uses: ./
       id: test
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        name: Test Basic Success (Implicit)
+        conclusion: success
+        output: |
+          {"summary":"Test was a success","text_description":"This is a text description of the annotations and images\nWith more stuff\nAnd more"}
     - uses: LouisBrunner/checks-action@v0.1.0
       if: always()
       with:
