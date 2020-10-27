@@ -4,11 +4,12 @@
 # whenever the build is stable.
 # This is determined by checking the Azure CI run outcomes.
 
-name: mirror when stable
+name: 'Check suite'
 on:
   check_suite:
-    types:
-      - completed
+    # types:
+    #   - completed
+    types: [rerequested, completed]
 
 jobs:
   sync:
@@ -20,6 +21,8 @@ jobs:
       run:
         GITHUB_CHECK_SUITE_ID=`curl -s https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID} | jq -r '.check_suite_id'`
         echo CSID = $GITHUB_CHECK_SUITE_ID
+    - name: Event info
+      run: echo "${{toJson(github)}}"
 
 #     uses: Anthchirp/action-wait-for-check@4699210ccc66e2a13260803fadbb77085421b891
 #           # Original repository: https://github.com/fountainhead/action-wait-for-check
