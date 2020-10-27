@@ -1,0 +1,8 @@
+name: "build-test"
+on: [push]
+
+jobs:
+  do_a_thing:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
