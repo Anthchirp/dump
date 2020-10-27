@@ -6,6 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+
     - uses: ./
       id: test
       with:
@@ -14,11 +15,12 @@ jobs:
         conclusion: success
         output: |
           {"summary":"Test was a success","text_description":"This is a text description of the annotations and images\nWith more stuff\nAnd more"}
-    - uses: LouisBrunner/checks-action@v0.1.0
+
+    - uses: LouisBrunner/checks-action@v1.1.0
       if: always()
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         name: Test XYZ
         conclusion: ${{ job.status }}
         output: |
-          {"summary":${{ steps.test.outputs.summary }}}
+          {"summary": ${{ steps.test.outputs.summary }} }
